@@ -15,7 +15,7 @@ type Route struct {
 
 type Routes []Route
 
-func NewRouter() *mux.Router {
+func NewHttpRouter() *mux.Router {
 
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
@@ -25,11 +25,10 @@ func NewRouter() *mux.Router {
 			Name(route.Name).
 			Handler(route.HandlerFunc)
 	}
-
 	// Handle Statics
 	router.
 		PathPrefix("/").
-		Handler(http.FileServer(http.Dir("./public/")))
+		Handler(http.FileServer(http.Dir("../web/")))
 
 	return router
 }

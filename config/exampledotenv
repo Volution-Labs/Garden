@@ -1,0 +1,3 @@
+# rename and use as .env | should not be commited
+APP_ENV=dev
+HTTP_SERVER_PORT=:8080
