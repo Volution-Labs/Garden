@@ -14,9 +14,9 @@ func main() {
 	initDB()
 
 	// Load .env
-	err := godotenv.Load("../config/.env")
+	err := godotenv.Load("./config/.env")
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal("Error loading .env file. Please see ./config/exampledotenv")
 	}
 	httpRouter := NewHttpRouter()
 	coapRouter := NewCoapRouter()
