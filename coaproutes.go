@@ -7,6 +7,6 @@ import (
 func NewCoapRouter() *coap.ServeMux {
 	router := coap.NewServeMux()
 	router.Handle("/sensors", coap.HandlerFunc(handleSensorData))
-	//router.Handle("/messages", coap.HandlerFunc(handlemessages))
+	router.Handle("/checkin", coap.HandlerFunc(handleCheckin))
 	return router
 }
