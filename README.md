@@ -2,13 +2,15 @@
 
 A system to monitor gardens, automatically water, and provide data for further actions needed for a living, green garden.
 
-**Early stages of a work in progress.**
+**A major work in progress.**
 
 ## To do
 
-- [x] Split up code
-- [ ] Hook up a bunch of things
-- [ ] Create routes for coap
+- [ ] Logging system
+- [x] Routes for Coap
+- [ ] Routes for Http
+- [ ] Add auth to coap and http
 - [ ] Command system for water timer
 - [ ] Front end
-- [ ] Failsafe for water flow
+- [x] CLI for device setup/control/debug
+- [ ] Failsafe systems

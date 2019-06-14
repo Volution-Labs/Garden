@@ -20,16 +20,14 @@ func ManualWater(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Cool! Will work on that")
 }
 
-// API: Add temp
+// Testing Route: Add temp
 func addTemp(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	loc := vars["loc"]
 	ts := vars["id"]
 	tf, err := strconv.ParseFloat(ts, 32)
 	if err != nil {
 		panic("Error opening db")
 	}
-	newTemp(tf, "soil", loc)
 	fmt.Fprintln(w, "Added to database:", tf)
 }
 
