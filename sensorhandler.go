@@ -16,6 +16,8 @@ func handleSensorData(w coap.ResponseWriter, req *coap.Request) {
 	var jsonPayload map[string]interface{}
 	if err := json.Unmarshal(p, &jsonPayload); err != nil {
 		log.Println("handleSensorData: Could not convert unmarshal payload")
+		w.Write([]byte("ERR"))
+		return
 	}
 	for k, v := range jsonPayload {
 		switch k {

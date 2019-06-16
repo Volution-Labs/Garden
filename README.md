@@ -1,16 +1,66 @@
-# Garden (better name in progress)
+# Garden Minder
 
-A system to monitor gardens, automatically water, and provide data for further actions needed for a living, green garden.
+A garden monitoring system. Automatically water, plan, and provide data for further actions needed for a living, green garden!
 
-**A major work in progress.**
+Built with **Go** using **CoAP** for system communication. **Gorm/sqlite** for storage and **client side web stack** for its user interface. Including an extended api for interfacing with other automation.
+
+For the other half of this project see [Garden-Device](https://github.com/Volution-Labs/garden-device)
+
+**A work in progress.**
+
+## Installation & Running
+
+```bash
+# Install With:
+
+go get github.com/volution-labs/garden-server
+
+```
+
+Before starting up the server, you should create an '.env' file inside the config folder for you specific environment. See [.envExample](../config/.envExample)
+
+```bash
+
+# rename and use as .env | should not be commited
+APP_ENV=dev
+HTTP_SERVER_PORT=:8080
+
+```
+
+```bash
+
+# Build and Run
+
+cd garden-server
+
+go build
+
+./garden-server
+
+```
+
+## System Overview
+
+_Insert Diagram_
+
+## CLI Tool
+
+A tool to aid in device setup and debuging is provided in /tools/garden-cli. See the [garden-cli README](https://github.com/volution-labs/garden-server/tools/garden-cli/README.md) for more info.
 
 ## To do
 
 - [ ] Logging system
+
 - [x] Routes for Coap
+
 - [ ] Routes for Http
+
 - [ ] Add auth to coap and http
+
 - [ ] Command system for water timer
+
 - [ ] Front end
+
 - [x] CLI for device setup/control/debug
+
 - [ ] Failsafe systems
