@@ -17,7 +17,7 @@ go get github.com/volution-labs/garden-server
 
 ```
 
-Before starting up the server, you should create an '.env' file inside the config folder for you specific environment. See [.envExample](../config/exampledotenv)
+Before starting up the server, you should create an '.env' file inside the config folder for you specific environment. See [.envExample](config/exampledotenv)
 
 ```bash
 # rename and use as .env | should not be commited
@@ -40,12 +40,12 @@ go build
 
 ## Documentation
 
-System Overview: [Diagram](../docs/diagram.jpg)
+System Overview: [Diagram](docs/diagram.jpg)
 Full Documentation: Still in development
 
 ## CLI Tool
 
-A tool to aid in device setup and debugging is provided in /tools/garden-cli. See the [garden-cli README](../tools/garden-cli/README.md) for more info.
+A tool to aid in device setup and debugging is provided in /tools/garden-cli. See the [garden-cli README](tools/garden-cli/README.md) for more info.
 
 ## To do
 
