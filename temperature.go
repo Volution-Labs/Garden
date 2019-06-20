@@ -21,7 +21,15 @@ func newSoilTempDatapoint(temperature float64) {
 }
 
 // Get temperature(s) from database
-func getTempsDatapoint() {
+func getTempDatapoints(numberOfPoints int) {
+	newestTemp := SoilTemp{}
+	db.Last(&newestTemp)
+	// Return something but print for now.
+	fmt.Printf("Newest Temperature: %v\u2103C at %v\n", newestTemp.Temperature, newestTemp.CreatedAt.String())
+}
+
+// Get
+func getTempDatapoint(time time.Time) {
 	newestTemp := SoilTemp{}
 	db.Last(&newestTemp)
 	// Return something but print for now.
