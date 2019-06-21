@@ -38,19 +38,13 @@ var routes = Routes{
 		"SensorDataList",
 		"GET",
 		"/api/sensors",
-		ListData,
+		getChartData,
 	},
 	Route{
 		"ManualWater",
 		"POST",
 		"/api/water/{key}",
 		ManualWater,
-	},
-	Route{
-		"AddTemp",
-		"POST",
-		"/api/temp/{id:[0-9]+}/{loc}",
-		addTemp,
 	},
 	Route{
 		"sendTemp",

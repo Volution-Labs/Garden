@@ -4,31 +4,19 @@ import (
 	//"encoding/json"
 	"fmt"
 	"net/http"
-	"strconv"
-
-	"github.com/gorilla/mux"
 )
 
-// API: Get and return sensor data
-func ListData(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "The soil is on fire!!!!")
+// API: Get and return specified amount of data points
+func getChartData(w http.ResponseWriter, r *http.Request) {
+	listOfTemps := SoilTemp{}
+	db.Find(&listOfTemps)
+	fmt.Printf("Newest Temperature: %v\u2103C at %v\n", listOfTemps.Temperature, listOfTemps.CreatedAt.String())
 }
 
-// API: Set to water on next update for lenght of time
+// API: Set to water on next update for lenght of time or turn off.
 func ManualWater(w http.ResponseWriter, r *http.Request) {
 	//vars := mux.Vars(r)
 	fmt.Fprintln(w, "Cool! Will work on that")
-}
-
-// Testing Route: Add temp
-func addTemp(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	ts := vars["id"]
-	tf, err := strconv.ParseFloat(ts, 32)
-	if err != nil {
-		panic("Error opening db")
-	}
-	fmt.Fprintln(w, "Added to database:", tf)
 }
 
 // API:
