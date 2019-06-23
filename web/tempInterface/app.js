@@ -1,39 +1,37 @@
 let dateFormat = 'MMMM DD YYYY';
-let data = [{
-        t: moment('April 01 2017', dateFormat),
-        y: 35
-    },
-    {
-        t: moment('April 02 2017', dateFormat),
-        y: 39
-    },
-    {
-        t: moment('April 03 2017', dateFormat),
-        y: 50
-    },
-    {
-        t: moment('April 04 2017', dateFormat),
-        y: 60
-    },
-    {
-        t: moment('April 05 2017', dateFormat),
-        y: 35
-    },
-    {
-        t: moment('April 06 2017', dateFormat),
-        y: 2
-    },
-    {
-        t: moment('April 07 2017', dateFormat),
-        y: 50
-    },
-    {
-        t: moment('April 08 2017', dateFormat),
-        y: 25
-    }
-]
+let data = []
+let fetchData = new Request('/api/sensors');
+let waterTimeInput
+
+
+fetch(fetchData)
+    .then(function (response) {
+        if (!response.ok) {
+            throw new Error('HTTP error, status = ' + response.status);
+        }
+        return response.json()
+    }).then(function (payload) {
+        payload.forEach(element => {
+            data.push({
+                t: moment(element.CreatedAt),
+                y: (element.Temperature * 1.8) + 32
+            })
+        });
+    });
+
+function water(state) {
+    var url = '/api/water/' + state;
+
+    fetch(url, {
+            method: 'POST'
+        }).then(res => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));
+
+}
 
 window.onload = function () {
+    waterTimeInput = document.getElementById("timeInput")
     var ctx = document.getElementById("stat-chart").getContext("2d");
     var myChart = new Chart(ctx, {
         type: "bar",
@@ -60,13 +58,13 @@ window.onload = function () {
                         autoSkip: true
                     },
                     time: {
-                        unit: 'day'
+                        unit: 'minute'
                     }
                 }],
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: "Temperature (ºC)"
+                        labelString: "Temperature (ºF)"
                     }
                 }]
             }

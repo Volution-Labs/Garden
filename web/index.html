@@ -34,11 +34,12 @@
                 </div>
                 <div class="card-body">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Watering Time (ms)"
+                        <input id="timeInput" type="text" class="form-control" placeholder="Watering Time (ms)"
                             aria-label="Lenght of time to water in milliseconds" aria-describedby="button-addon4">
                         <div class="input-group-append" id="button-addon4">
-                            <button class="btn btn-outline-success" type="button">Water</button>
-                            <button class="btn btn-outline-danger" type="button">Stop</button>
+                            <button class="btn btn-outline-success" type="button"
+                                onclick="water(waterTimeInput.value)">Water</button>
+                            <button class="btn btn-outline-danger" type="button" onclick="water('off')">Stop</button>
                         </div>
                     </div>
                 </div>
