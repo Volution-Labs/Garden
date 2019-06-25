@@ -4,7 +4,7 @@ A garden monitoring system. Automatically water, plan, and provide data for furt
 
 Built with **Go** using **CoAP** for system communication. **Gorm/sqlite** for storage and **client side web stack** for its user interface. Including an extended api for interfacing with other automation.
 
-For the other half of this project see [Garden-Device](https://github.com/Volution-Labs/garden-device)
+This respiratory contains the hub/server designed for an embedded linux system. For the other half of this project see [Garden-Device](https://github.com/Volution-Labs/garden-device)
 
 **A work in progress.**
 
