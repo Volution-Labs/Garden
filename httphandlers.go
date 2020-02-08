@@ -16,6 +16,9 @@ func getChartData(w http.ResponseWriter, r *http.Request) {
 	var temps []SoilTemp
 	db.Order("id desc").Limit(20).Find(&temps)
 	json.NewEncoder(w).Encode(&temps)
+	//var temps []SoilTemp
+	db.Order("id desc").Limit(20).Find(&temps)
+	json.NewEncoder(w).Encode(&temps)
 }
 
 // API: Set to water on next update for lenght of time or turn off.
