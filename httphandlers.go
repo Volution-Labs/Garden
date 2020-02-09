@@ -7,16 +7,17 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/Volution-Labs/garden-server/dbModels"
 	coap "github.com/go-ocf/go-coap"
 	"github.com/gorilla/mux"
 )
 
 // API: Get and return specified amount of data points
 func getChartData(w http.ResponseWriter, r *http.Request) {
-	var temps []SoilTemp
+	var temps []dbModels.SoilTemp
 	db.Order("id desc").Limit(20).Find(&temps)
 	json.NewEncoder(w).Encode(&temps)
-	//var temps []SoilTemp
+	//var temps []dbModels.SoilTemp
 	db.Order("id desc").Limit(20).Find(&temps)
 	json.NewEncoder(w).Encode(&temps)
 }
