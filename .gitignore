@@ -2,3 +2,5 @@
 .env
 .vscode/
 config.h
+*.db
+*.code-workspace

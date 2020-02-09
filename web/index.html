@@ -1,6 +1,67 @@
 <!DOCTYPE html>
 <html>
 
-<body>Hello everyone!!!!</body>
+<head>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./tempInterface/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="./tempInterface/app.js"></script>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <div id="content">
+            <h1 id="title" class="title">Garden Minder Dashboard</h1>
+            <p id="description">Lets get some water on these plants, the quick and dirty way until this system is fully
+                built!</p>
+            <div class="card">
+                <div class="card-header">
+                    Sensor Graph
+                </div>
+                <div class="card-body">
+                    <canvas id="stat-chart" width="400" height="200"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    Water Commands
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input id="timeInput" type="text" class="form-control" placeholder="Watering Time (ms)"
+                            aria-label="Lenght of time to water in milliseconds" aria-describedby="button-addon4">
+                        <div class="input-group-append" id="button-addon4">
+                            <button class="btn btn-outline-success" type="button"
+                                onclick="water(waterTimeInput.value)">Water</button>
+                            <button class="btn btn-outline-danger" type="button" onclick="water('off')">Stop</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    Settings
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex w-100 justify-content-between align-items-center">
+                        <div>Moisture Calibration: </div>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Moisture Calibration">
+                            <button type="button" class="btn btn-outline-secondary">Dry Soil</button>
+                            <button type="button" class="btn btn-outline-secondary">Wet Soil</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item">Server settings:</li>
+                    <li class="list-group-item">Other setting:</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
 
 </html>

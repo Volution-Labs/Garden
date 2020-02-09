@@ -2,35 +2,42 @@ package main
 
 import (
 	//"encoding/json"
+	"encoding/json"
 	"fmt"
 	"net/http"
-	"strconv"
+	"strings"
 
+	coap "github.com/go-ocf/go-coap"
 	"github.com/gorilla/mux"
 )
 
-// API: Get and return sensor data
-func ListData(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "The soil is on fire!!!!")
+// API: Get and return specified amount of data points
+func getChartData(w http.ResponseWriter, r *http.Request) {
+	var temps []SoilTemp
+	db.Order("id desc").Limit(20).Find(&temps)
+	json.NewEncoder(w).Encode(&temps)
+	//var temps []SoilTemp
+	db.Order("id desc").Limit(20).Find(&temps)
+	json.NewEncoder(w).Encode(&temps)
 }
 
-// API: Set to water on next update for lenght of time
+// API: Set to water on next update for lenght of time or turn off.
 func ManualWater(w http.ResponseWriter, r *http.Request) {
-	//vars := mux.Vars(r)
-	fmt.Fprintln(w, "Cool! Will work on that")
-}
-
-// API: Add temp
-func addTemp(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	loc := vars["loc"]
-	ts := vars["id"]
-	tf, err := strconv.ParseFloat(ts, 32)
+	state := vars["key"]
+	co, err := coap.Dial("udp", "garden.local:5683")
 	if err != nil {
-		panic("Error opening db")
+		fmt.Printf("Error dialing: %v", err)
 	}
-	newTemp(tf, "soil", loc)
-	fmt.Fprintln(w, "Added to database:", tf)
+	resp, err := co.Post("/water", coap.MediaType(50), strings.NewReader(state))
+	if err != nil {
+		fmt.Printf("Error sending request: %v\n", err)
+	}
+	if string(resp.Payload()) == "ok" {
+		fmt.Printf("Valve set to %v\n", state)
+	} else {
+		fmt.Printf("Error while setting %v | Response: %v\n", state, string(resp.Payload()))
+	}
 }
 
 // API:

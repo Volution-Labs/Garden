@@ -1,20 +1,37 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"time"
 )
 
-// add new temp to db
-func newTemp(temp float64, measurementType string, location string) {
-	db.AutoMigrate(&soilTemp{})
-	newTemp := soilTemp{TimeStamp: time.Now(), Value: temp, Location: location}
-	db.Create(&newTemp)
+type SoilTemp struct {
+	ID          int64 `gorm:"primary_key"`
+	CreatedAt   time.Time
+	Temperature float64
 }
 
-// get
-func getTemps(dateTimeStart time.Time, dataTimeEnd time.Time) {
-	lastTemp := soilTemp{}
-	db.Last(&lastTemp)
-	log.Printf(lastTemp.Location)
+// Add new temperature to database
+func newSoilTempDatapoint(temperature float64) {
+	if temperature > -90 && temperature < 150 {
+		db.AutoMigrate(&SoilTemp{})
+		newTempReading := SoilTemp{CreatedAt: time.Now(), Temperature: temperature}
+		db.Create(&newTempReading)
+	}
+}
+
+// Get temperature(s) from database
+func getTempDatapoints(numberOfPoints int) {
+	newestTemp := SoilTemp{}
+	db.Last(&newestTemp)
+	// Return something but print for now.
+	fmt.Printf("Newest Temperature: %v\u2103C at %v\n", newestTemp.Temperature, newestTemp.CreatedAt.String())
+}
+
+// Get
+func getTempDatapoint(time time.Time) {
+	newestTemp := SoilTemp{}
+	db.Last(&newestTemp)
+	// Return something but print for now.
+	fmt.Printf("Newest Temperature: %v\u2103C at %v\n", newestTemp.Temperature, newestTemp.CreatedAt.String())
 }
