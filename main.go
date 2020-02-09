@@ -22,7 +22,12 @@ func main() {
 	coapRouter := NewCoapRouter()
 
 	go func() {
-		http.ListenAndServe(os.Getenv("HTTP_SERVER_PORT"), httpRouter)
+		if err := http.ListenAndServe(os.Getenv("HTTP_SERVER_PORT"), httpRouter); err != nil {
+			panic(err)
+		}
 	}()
-	coap.ListenAndServe(":5683", "udp", coapRouter)
+
+	if err := coap.ListenAndServe(":5683", "udp", coapRouter); err != nil {
+		panic(err)
+	}
 }
