@@ -1,3 +1,8 @@
 # rename and use as .env | should not be commited
 APP_ENV=dev
 HTTP_SERVER_PORT=:8080
+PUSHOVER_USER=
+PUSHOVER_TOKEN=
+EMAIL_SMTP=
+EMAIL_USER=
+EMAIL_PASSWORD=
