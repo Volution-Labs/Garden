@@ -11,23 +11,33 @@ import (
 
 func main() {
 	// Load DB
-	initDB()
+	if err := initDB(); err != nil {
+		log.Fatal(err)
+	}
+	log.Println("✨  DB started successfully  ✨")
 
 	// Load .env
-	err := godotenv.Load("./config/.env")
-	if err != nil {
-		log.Fatal("Error loading .env file. Please see ./config/exampledotenv")
+	if err := godotenv.Load("./config/.env"); err != nil {
+		log.Fatal("Error loading .env file: %s", err)
 	}
+	log.Println("✨  config loaded successfully  ✨")
+
+	// Create routers
 	httpRouter := NewHttpRouter()
 	coapRouter := NewCoapRouter()
+	log.Println("✨  routers created  ✨")
 
+	// Start coap
 	go func() {
-		if err := http.ListenAndServe(os.Getenv("HTTP_SERVER_PORT"), httpRouter); err != nil {
-			panic(err)
+		if err := coap.ListenAndServe(os.Getenv("COAP_SERVER_PORT"), "udp", coapRouter); err != nil {
+			log.Fatal(err)
 		}
 	}()
+	log.Printf("\n\ncoap started successfully, listening at: %s", os.Getenv("COAP_SERVER_PORT"))
 
-	if err := coap.ListenAndServe(":5683", "udp", coapRouter); err != nil {
-		panic(err)
+	// Start app
+	log.Printf("\n\napp started successfully, listening at: %s", os.Getenv("HTTP_SERVER_PORT"))
+	if err := http.ListenAndServe(os.Getenv("HTTP_SERVER_PORT"), httpRouter); err != nil {
+		log.Fatal(err)
 	}
 }
