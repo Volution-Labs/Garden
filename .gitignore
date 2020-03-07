@@ -4,3 +4,4 @@
 config.h
 *.db
 *.code-workspace
+garden-server
