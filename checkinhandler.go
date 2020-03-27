@@ -7,6 +7,7 @@ import (
 	coap "github.com/go-ocf/go-coap"
 )
 
+// Handle checkins from battery powered/normaly sleeping devices
 func handleCheckin(w coap.ResponseWriter, req *coap.Request) {
 	message := req.Msg.Payload()
 	fmt.Printf("New device checkin: %v\n", string(message))
